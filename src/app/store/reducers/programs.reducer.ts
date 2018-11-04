@@ -2,7 +2,6 @@ import { Action } from '@ngrx/store';
 import Program from '../../models/programs.model';
 import * as programActions from '../actions/program.actions';
 
-
 export interface State {
 	programs : Program[],
 

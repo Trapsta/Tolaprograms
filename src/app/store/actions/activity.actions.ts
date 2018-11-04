@@ -1,11 +1,45 @@
 import { Action } from '@ngrx/store';
+import Activity from '../../models/activities.model';
 
 export enum ActivityActionTypes {
-  LoadActivitys = '[Activity] Load Activitys'
+  LOAD_ACTIVITIES = '[Activity] Load Activities',
+  ACTIVITIES_LOADED = '[Activity] Activities Loaded',
+  ADD_ACTIVITY = '[Activity] Add Activity',
+  ACTIVITY_ADDED = '[Activity] Activity Added',
+  DELETE_ACTIVITY = '[Activity] Delete Activity',
+  ACTIVITY_DELETED = '[Activity] Activity Deleted',
+  LOAD_ACTIVITIES_ERROR = '[Activity] Load Activities Error'
 }
 
-export class LoadActivitys implements Action {
-  readonly type = ActivityActionTypes.LoadActivitys;
+export class LoadActivitiesAction implements Action {
+  readonly type = ActivityActionTypes.LOAD_ACTIVITIES;
 }
 
-export type ActivityActions = LoadActivitys;
+export class ActivitiesLoadedAction implements Action {
+  readonly type = ActivityActionTypes.ACTIVITIES_LOADED;
+  constructor(public payload: Activity[]) {}
+}
+
+export class AddActivityAction implements Action {
+  readonly type = ActivityActionTypes.ADD_ACTIVITY;
+}
+
+export class ActivityAddedAction implements Action {
+  readonly type = ActivityActionTypes.ACTIVITY_ADDED;
+  constructor(public payload: Activity[]) {}
+}
+
+export class DeleteActivityAction implements Action {
+  readonly type = ActivityActionTypes.DELETE_ACTIVITY;
+  constructor(public payload: Activity.['id']) {}
+}
+
+export class ActivityDeleted implements Action {
+  readonly type = ActivityActionTypes.ACTIVITY_DELETED;
+}
+
+export class LoadActivitiesError implements Action {
+  readonly type = ActivityActionTypes.LOAD_ACTIVITIES_ERROR;
+}
+
+export type ActivityActions = LoadActivitiesAction | ActivitiesLoadedAction | AddActivityAction | ActivityAddedAction | DeleteActivityAction | LoadActivitiesError;

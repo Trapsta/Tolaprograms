@@ -18,7 +18,7 @@ export class AppService {
   constructor(private http: Http) { }
 
 
-  // API: GET /program
+  // API: GET /workflowlevel1
   public getPrograms(): Observable<Program[]> {
   	return this.http.get(API_URL + '/workflowlevel1', { headers: config })
     .map(response => {
@@ -41,10 +41,68 @@ export class AppService {
   }
 
 
+  //API: GET /workflowlevel2
+  public getActivities(): Observable<Activity[]>  {
+    return this.http.get(API_URL + '/workflowlevel2', { headers: config })
+      .map((res) =>
+        res.json().map(item => {
+          return new Activity(
+            item.id,
+            item.url,
+            item.name,
+            item.workflowlevel1,
+            item.expected_start_date,
+            item.expected_end_date,
+            item.actual_start_date,
+            item.actual_end_date,
+            item.description,
+            item.short_name,
+            item.create_date,
+            item.edit_date,
+            item.status,
+            item.progress
+          )
+        }
+        )
+      ).catch(this.handleError);
+  }
+
+
+  //API: POST /workflowlevel2
+  addActivity(activity) {
+    return this.http.post(API_URL + '/workflowlevel2', activity, { headers: config })
+      .map((res) => {
+        const item = res.json();
+        return new Activity(
+          item.id,
+          item.url,
+          item.name,
+          item.workflowlevel1,
+          item.expected_start_date,
+          item.expected_end_date,
+          item.actual_start_date,
+          item.actual_end_date,
+          item.description,
+          item.short_name,
+          item.create_date,
+          item.edit_date,
+          item.status,
+          item.progress
+        )
+      }).catch(this.handleError);
+  }
+
+
+  //API: DELETE /workflowlevel2/id
+  deleteActivity(activityId) {
+    return this.http.delete(API_URL + '/workflowlevel2' + activityId, { headers: config })
+  }
+
+
 
   //Log errors on the console
   private handleError (error: Response | any) {
-	  console.error('ProgramService::handleError', error);
+	  console.error('AppService::handleError', error);
 	  return Observable.throw(error);
 	}
 }
