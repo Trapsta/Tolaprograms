@@ -1,4 +1,4 @@
-import Activity from "./activties.model";
+import Activity from "./activities.model";
 
 export default class Program {
     url: string;
