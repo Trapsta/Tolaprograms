@@ -72,6 +72,7 @@ export class ProgramsComponent implements OnInit {
         expected_end_date: enddateValue
       }
     });
+    this.toggleForm();
   	
   }
 
