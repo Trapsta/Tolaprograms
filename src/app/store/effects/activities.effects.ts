@@ -24,7 +24,7 @@ export class ActivitiesEffects {
     	),
     startWith(new activityActions.LoadActivitiesAction()),
     switchMap(() => {
-      return this.AppService.getPrograms()
+      return this.AppService.getActivities()
         .pipe(
           map((result) => {
             /*
@@ -38,41 +38,41 @@ export class ActivitiesEffects {
   );
 
 
-  @Effect()
-  addactivity$ = this.actions$.pipe(
-  	ofType<activityActions.AddActivityAction>(
-  		activityActions.ActivityActionTypes.ADD_ACTIVITY
-  		),
-  	startWith(new activityActions.AddActivityAction()),
-  	switchMap((payload) => {
-  		return this.AppService.addActivity(payload)
-  		.pipe(
-  			map((result) => {
-  				return ({ type: activityActions.ActivityActionTypes.ACTIVITY_ADDED, payload: {loadedActivity: result} })
-  			})
-  		)
-  	})
-  );
+  // @Effect()
+  // addactivity$ = this.actions$.pipe(
+  // 	ofType<activityActions.AddActivityAction>(
+  // 		activityActions.ActivityActionTypes.ADD_ACTIVITY
+  // 		),
+  // 	startWith(new activityActions.AddActivityAction()),
+  // 	switchMap((payload) => {
+  // 		return this.AppService.addActivity(payload)
+  // 		.pipe(
+  // 			map((result) => {
+  // 				return ({ type: activityActions.ActivityActionTypes.ACTIVITY_ADDED, payload: {loadedActivity: result} })
+  // 			})
+  // 		)
+  // 	})
+  // );
 
 
-  @Effect()
-  deleteActivity$ = this.actions$.pipe(
-  	ofType<activityActions.DeleteActivityAction>(
-  		activityActions.ActivityActionTypes.DELETE_ACTIVITY
-  		),
-  	startWith(new activityActions.DeleteActivityAction(this.activtyIdInProgress)),
-  	switchMap((action) => {
-  		return this.AppService.deleteActivity(action.payload)
-  		.pipe(
-  			map((result) => 
-  				this.activtyIdInProgress = action.payload  				
-  			),
-  			switchMap((result) => {
-  				return ({ type: activityActions.ActivityActionTypes.ACTIVITY_DELETED , payload: {activityId: this.activtyIdInProgress} })
-  			})
-  		)
-  	})
-  );
+  // @Effect()
+  // deleteActivity$ = this.actions$.pipe(
+  // 	ofType<activityActions.DeleteActivityAction>(
+  // 		activityActions.ActivityActionTypes.DELETE_ACTIVITY
+  // 		),
+  // 	startWith(new activityActions.DeleteActivityAction(this.activtyIdInProgress)),
+  // 	switchMap((action) => {
+  // 		return this.AppService.deleteActivity(action.payload)
+  // 		.pipe(
+  // 			map((result) => 
+  // 				this.activtyIdInProgress = action.payload  				
+  // 			),
+  // 			switchMap((result) => {
+  // 				return ({ type: activityActions.ActivityActionTypes.ACTIVITY_DELETED , payload: {activityId: this.activtyIdInProgress} })
+  // 			})
+  // 		)
+  // 	})
+  // );
 
 
 }

@@ -11,7 +11,7 @@ export default class Program {
     create_date: Date;
     edit_date: Date;
     organization: string;
-    activties: Activity[];
+    activities: Activity[];
 
     constructor(url: string, id: number, status: string, name: string, description: string, start_date: Date, end_date: Date, create_date: Date, edit_date: Date, organization: string, activities: Activity[]) {
         this.url = url;
@@ -24,6 +24,6 @@ export default class Program {
         this.create_date = create_date;
         this.edit_date = edit_date;
         this.organization = organization;
-        this.activties = activities;
+        this.activities = activities;
     }
 }

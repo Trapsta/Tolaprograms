@@ -40,3 +40,6 @@ export function reducer(state = initialState, action: Action): State {
       return state;
   }
 }
+
+
+export const getStateActivities = (state: State) => state.activities;

@@ -41,68 +41,93 @@ export class AppService {
   }
 
 
-  //API: GET /workflowlevel2
-  public getActivities(): Observable<Activity[]>  {
-    return this.http.get(API_URL + '/workflowlevel2', { headers: config })
-      .map((res) =>
-        res.json().map(item => {
-          return new Activity(
-            item.id,
-            item.url,
-            item.name,
-            item.workflowlevel1,
-            item.expected_start_date,
-            item.expected_end_date,
-            item.actual_start_date,
-            item.actual_end_date,
-            item.description,
-            item.short_name,
-            item.create_date,
-            item.edit_date,
-            item.status,
-            item.progress
-          )
-        }
-        )
-      ).catch(this.handleError);
+
+  // API: GET /workflowlevel2
+  public getActivities(): Observable<Activity[]> {
+    return this.http.get(API_URL + '/workflowlevel2/', { headers: config })
+    .map(response => {
+      const programs = response.json();
+      return programs.map((activity) => new Activity(
+        activity.id,
+        activity.url,
+        activity.name,
+        activity.workflowlevel1,
+        activity.expected_start_date,
+        activity.expected_end_date,
+        activity.actual_start_date,
+        activity.actual_end_date,
+        activity.description,
+        activity.short_name,
+        activity.create_date,
+        activity.edit_date,
+        activity.status,
+        activity.progress
+        ));
+    })
+    .catch(this.handleError);
   }
+
+
+  //API: GET /workflowlevel2
+  // public getActivities(): Observable<Activity[]>  {
+  //   return this.http.get(API_URL + '/workflowlevel2', { headers: config })
+  //     .map((res) =>
+  //       res.json().map((activity) => new Activity(
+  //           item.id,
+  //           item.url,
+  //           item.name,
+  //           item.workflowlevel1,
+  //           item.expected_start_date,
+  //           item.expected_end_date,
+  //           item.actual_start_date,
+  //           item.actual_end_date,
+  //           item.description,
+  //           item.short_name,
+  //           item.create_date,
+  //           item.edit_date,
+  //           item.status,
+  //           item.progress
+  //         ));
+  //       )}
+  //     ).catch(this.handleError);
+  // }
 
 
   //API: POST /workflowlevel2
-  addActivity(activity) {
-    return this.http.post(API_URL + '/workflowlevel2', activity, { headers: config })
-      .map((res) => {
-        const item = res.json();
-        return new Activity(
-          item.id,
-          item.url,
-          item.name,
-          item.workflowlevel1,
-          item.expected_start_date,
-          item.expected_end_date,
-          item.actual_start_date,
-          item.actual_end_date,
-          item.description,
-          item.short_name,
-          item.create_date,
-          item.edit_date,
-          item.status,
-          item.progress
-        )
-      }).catch(this.handleError);
-  }
+  // addActivity(activity) {
+  //   return this.http.post(API_URL + '/workflowlevel2', activity, { headers: config })
+  //     .map((res) => {
+  //       const item = res.json();
+  //       return new Activity(
+  //         item.id,
+  //         item.url,
+  //         item.name,
+  //         item.workflowlevel1,
+  //         item.expected_start_date,
+  //         item.expected_end_date,
+  //         item.actual_start_date,
+  //         item.actual_end_date,
+  //         item.description,
+  //         item.short_name,
+  //         item.create_date,
+  //         item.edit_date,
+  //         item.status,
+  //         item.progress
+  //       )
+  //     }).catch(this.handleError);
+  // }
 
 
   //API: DELETE /workflowlevel2/id
-  deleteActivity(activityId) {
-    return this.http.delete(API_URL + '/workflowlevel2' + activityId, { headers: config })
-  }
+  // deleteActivity(activityId) {
+  //   return this.http.delete(API_URL + '/workflowlevel2' + activityId, { headers: config })
+  // }
 
 
 
-  //Log errors on the console
-  private handleError (error: Response | any) {
-	  console.error('AppService::handleError', error);
-	  return Observable.throw(error);
-	}
+  //Return error to client
+ //  private handleError (error: Response | any) {
+	//   console.error('AppService::handleError', error);
+	//   return Observable.throw(error);
+	// }
 }

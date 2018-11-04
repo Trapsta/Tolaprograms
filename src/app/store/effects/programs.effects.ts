@@ -34,7 +34,17 @@ export class ProgramsEffects {
             return ({ type: programActions.ProgramsActionTypes.PROGRAMS_LOADED, payload: result })
           })
         )
+        .catch((error) => {
+        const programs = JSON.parse(localStorage.getItem('programs'));
+        console.warn('cached data:');
+        console.log(programs);
+        if (programs !== null) {
+          return ({ type: programActions.ProgramsActionTypes.PROGRAMS_LOADED, payload: programs })
+        }
+          return ({ type: programActions.ProgramsActionTypes.LOAD_PROGRAMS_ERROR, payload: error })
+      })
     })
+
   );
 
 

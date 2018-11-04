@@ -13,6 +13,8 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { ProgramsEffects } from './store/effects/programs.effects';
 import { ActivitiesEffects } from './store/effects/activities.effects';
+import { ReactiveFormsModule } from '@angular/forms';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { ActivitiesEffects } from './store/effects/activities.effects';
     BrowserModule,
     AppRoutingModule,
     HttpModule,
+    ReactiveFormsModule,
+    NgbModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([ProgramsEffects, ActivitiesEffects])

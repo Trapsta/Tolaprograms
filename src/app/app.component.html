@@ -1,11 +1,19 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
-<nav class="navbar">
-  <h1>All Programs</h1>
+  <div class="flash-messages-container">
+  <!-- <p *ngFor="let message of messages">
+    <ngb-alert [type]="message.type" (close)="closeAlert(message.id)">{{ message.message }}</ngb-alert>
+  </p> -->
+  </div>
+<nav class="navbar navbar-light bg-faded">
+  <h1 class="navbar-brand mb-0 text-center">This is the list of programs</h1>
 </nav>
- <ul class="programs-list">
-   <li *ngFor="let program of programs"> {{ program.name }} </li>
- </ul>
+     <div *ngFor="let program of programs" class="program-item">
+       <app-programs [program]="program"> </app-programs>
+     </div>
 </div>
+
+
+<router-outlet></router-outlet>
+
 
 <router-outlet></router-outlet>

@@ -1,3 +1,73 @@
-<p>
-  programs works!
-</p>
+<ngb-accordion #acc="ngbAccordion">
+  <ngb-panel title="{{ program.name }}">
+    <ng-template ngbPanelContent>
+      <div *ngIf="program.activities.length == 0"> No activities added yet</div>
+      <ul *ngFor="let activity of program.activities" class="list-group">
+        <li class="list-group-item">
+          <app-activities [activity]=activity>
+          </app-activities>
+        </li>
+      </ul>
+      <div *ngIf="!showForm">
+        <li class="list-group-item text-center">
+        <button class="btn btn-primary" (click)="toggleForm()"> Add an activity </button>
+      </li>
+      </div>
+      <div *ngIf="showForm">
+      <li class="list-group-item">
+        <div *ngIf="!name; else forminfo">
+          <form [formGroup]="rForm" (ngSubmit)="add(rForm.value)" #myform="ngForm">
+            <div class="row">
+              <div class="col-sm-2"> 
+                <label for="name" class="float-right">Name:<small>*</small></label>
+              </div>
+              <div class="col-sm-9"> 
+                <div class="input-group">
+                  <input type="text" class="form-control float-left" formControlName="name" name="name">
+                </div>
+              </div>
+            </div>
+
+            <p class="alert alert-warning" *ngIf="rForm.controls.name.errors && formSubmitted">This field is required!</p>
+            <div class="row">
+              <div class="col-sm-2">
+                <label class="float-right" for="dps">Start date:</label>
+              </div>
+              <div class="col-sm-9">
+                <div class="input-group">
+                  <input type="text" formControlName="startdate" class="form-control float-left" placeholder="yyyy-mm-dd" name="dps" ngbDatepicker #d="ngbDatepicker">
+
+                  <button class="input-group-addon" (click)="d.toggle()" type="button">
+                        <img src="https://image.flaticon.com/icons/svg/26/26012.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-2">
+                <label class="float-right" for="dpe">End date : </label>
+              </div>
+            <div class="col-sm-9">
+                <div class="input-group">
+                  <input type="text" formControlName="enddate" class="form-control float-left" placeholder="yyyy-mm-dd" name="dpe" ngbDatepicker #a="ngbDatepicker">
+                  <button class="input-group-addon" (click)="a.toggle()" type="button">
+                    <img src="https://image.flaticon.com/icons/svg/26/26012.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="float-right submit-button-container">
+              <input type="submit" class="btn btn-primary" value="Add Activity" >
+            </div>
+            <div style="clear : both;">
+              <small><span>*</span> : required field</small>
+            </div>
+          </form>
+        </div>
+
+      </li>
+    </div>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
