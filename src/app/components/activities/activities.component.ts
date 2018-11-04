@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import Activity from '../../models/programs.model';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../store/reducers';
-import * as activityActions from './store/actions/activity.actions';
+import * as activityActions from '../../store/actions/activity.actions';
 
 @Component({
   selector: 'app-activities',
@@ -19,9 +19,10 @@ export class ActivitiesComponent implements OnInit {
   ngOnInit() {
   }
 
-  removeActivty(activityId) {
+  deleteActivty(activityId) {
     console.log(activityId)
-    //this.store.dispatch({type : DELETE_ACTIVITY , payload : {activityId}})
+    this.store.dispatch(new activityActions.DeleteActivityAction(activityId));
+
   }
 
 }

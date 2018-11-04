@@ -16,7 +16,7 @@
       <div *ngIf="showForm">
       <li class="list-group-item">
         <div *ngIf="!name; else forminfo">
-          <form [formGroup]="rForm" (ngSubmit)="add(rForm.value)" #myform="ngForm">
+          <form [formGroup]="rForm" (ngSubmit)="addActivity(rForm.value)" #myform="ngForm">
             <div class="row">
               <div class="col-sm-2"> 
                 <label for="name" class="float-right">Name:<small>*</small></label>
@@ -35,7 +35,7 @@
               </div>
               <div class="col-sm-9">
                 <div class="input-group">
-                  <input type="text" formControlName="startdate" class="form-control float-left" placeholder="yyyy-mm-dd" name="dps" ngbDatepicker #d="ngbDatepicker">
+                  <input type="text" formControlName="startdate" class="form-control float-left" placeholder="dd-mm-yyyy" name="dps" ngbDatepicker #d="ngbDatepicker">
 
                   <button class="input-group-addon" (click)="d.toggle()" type="button">
                         <img src="https://image.flaticon.com/icons/svg/26/26012.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
@@ -50,7 +50,7 @@
               </div>
             <div class="col-sm-9">
                 <div class="input-group">
-                  <input type="text" formControlName="enddate" class="form-control float-left" placeholder="yyyy-mm-dd" name="dpe" ngbDatepicker #a="ngbDatepicker">
+                  <input type="text" formControlName="enddate" class="form-control float-left" placeholder="dd-mm-yyyy" name="dpe" ngbDatepicker #a="ngbDatepicker">
                   <button class="input-group-addon" (click)="a.toggle()" type="button">
                     <img src="https://image.flaticon.com/icons/svg/26/26012.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
                   </button>

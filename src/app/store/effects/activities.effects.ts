@@ -38,41 +38,22 @@ export class ActivitiesEffects {
   );
 
 
-  // @Effect()
-  // addactivity$ = this.actions$.pipe(
-  // 	ofType<activityActions.AddActivityAction>(
-  // 		activityActions.ActivityActionTypes.ADD_ACTIVITY
-  // 		),
-  // 	startWith(new activityActions.AddActivityAction()),
-  // 	switchMap((payload) => {
-  // 		return this.AppService.addActivity(payload)
-  // 		.pipe(
-  // 			map((result) => {
-  // 				return ({ type: activityActions.ActivityActionTypes.ACTIVITY_ADDED, payload: {loadedActivity: result} })
-  // 			})
-  // 		)
-  // 	})
-  // );
+
+  @Effect() addactivity$: Observable<Action> = this.actions$.pipe(
+    ofType<activityActions.AddActivityAction>(activityActions.ActivityActionTypes.ADD_ACTIVITY),
+    mergeMap(action => this.AppService.addActivity(action.payload).pipe(
+      map(result => (new activityActions.ActivityAddedAction(result)))
+    ))
+  )
+       
 
 
-  // @Effect()
-  // deleteActivity$ = this.actions$.pipe(
-  // 	ofType<activityActions.DeleteActivityAction>(
-  // 		activityActions.ActivityActionTypes.DELETE_ACTIVITY
-  // 		),
-  // 	startWith(new activityActions.DeleteActivityAction(this.activtyIdInProgress)),
-  // 	switchMap((action) => {
-  // 		return this.AppService.deleteActivity(action.payload)
-  // 		.pipe(
-  // 			map((result) => 
-  // 				this.activtyIdInProgress = action.payload  				
-  // 			),
-  // 			switchMap((result) => {
-  // 				return ({ type: activityActions.ActivityActionTypes.ACTIVITY_DELETED , payload: {activityId: this.activtyIdInProgress} })
-  // 			})
-  // 		)
-  // 	})
-  // );
+  @Effect() deleteActivity$: Observable<Action> = this.actions$.pipe(
+    ofType<activityActions.DeleteActivityAction>(activityActions.ActivityActionTypes.DELETE_ACTIVITY),
+    mergeMap(action => this.AppService.deleteActivity(action.payload).pipe(
+      map(result => (new activityActions.ActivityDeletedAction(action.payload)))
+    ))
+  )
 
 
 }
