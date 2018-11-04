@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
+import { AppService } from './app.service';
 import { AppComponent } from './app.component';
 import { ProgramsComponent } from './components/programs/programs.component';
 import { ActivitiesComponent } from './components/activities/activities.component';
@@ -22,11 +23,12 @@ import { ActivitiesEffects } from './store/effects/activities.effects';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([ProgramsEffects, ActivitiesEffects])
   ],
-  providers: [],
+  providers: [AppService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
