@@ -75,7 +75,7 @@ export class AppService {
       expected_start_date: activity.expected_start_date,
       expected_end_date: activity.expected_end_date
     }
-    return this.http.post<any>(API_URL + '/workflowlevel2/', body, { headers: config })
+    return this.http.post(API_URL + '/workflowlevel2/', body, { headers: config })
       .map((res) => {
         console.log(res);
         const activity = res.json();

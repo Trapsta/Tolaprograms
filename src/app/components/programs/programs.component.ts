@@ -50,17 +50,14 @@ export class ProgramsComponent implements OnInit {
     if (this.rForm.invalid) {
       return false;
     }
+
+    /*
+      Hints:
+      - use an npm module to convert the date to the api date format (e.g moment.js)
+    */
     let startdateValue = moment([value.startdate.day, value.startdate.month, value.startdate.year], "DD-MM-YYYY");
     let enddateValue = moment([value.enddate.day, value.enddate.month, value.enddate.year], "DD-MM-YYYY");      
-    //let startdateValue = value.startdate.day + '.' + value.startdate.month + '.' + value.startdate.year;
-    //let enddateValue = value.enddate.day + '.' + value.enddate.month + '.' + value.enddate.year;
-    //console.log(startdateValue + ' ' + enddateValue);
-    // let payload = {
-    //     "name": value.name,
-    //     "workflowlevel1": this.program.url,
-    //     "expected_start_date": startdateValue,
-    //     "expected_end_date": enddateValue
-    // }
+
     console.log(startdateValue);
     //this.store.dispatch(new activityActions.AddActivityAction(payload));
     this.store.dispatch({      

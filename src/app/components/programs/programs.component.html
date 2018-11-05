@@ -16,7 +16,7 @@
       <div *ngIf="showForm">
       <li class="list-group-item">
         <div *ngIf="!name; else forminfo">
-          <form [formGroup]="rForm" (ngSubmit)="addActivity(rForm.value)" #myform="ngForm">
+          <form [formGroup]="rForm" (ngSubmit)="addActivity(rForm.value)" #myform="ngForm" class="form">
             <div class="row">
               <div class="col-sm-2"> 
                 <label for="name" class="float-right">Name:<small>*</small></label>

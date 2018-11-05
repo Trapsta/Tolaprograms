@@ -1,9 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { BrowserModule, By } from '@angular/platform-browser';
 import { ProgramsComponent } from './programs.component';
 import { ActivitiesComponent } from '../activities/activities.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from '../../store/reducers';
@@ -12,6 +13,7 @@ import { environment } from '../../../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { ProgramsEffects } from '../../store/effects/programs.effects';
 import { ActivitiesEffects } from '../../store/effects/activities.effects';
+import { DebugElement } from '@angular/core';
 
 describe('ProgramsComponent', () => {
   let component: ProgramsComponent;
@@ -21,6 +23,8 @@ describe('ProgramsComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         NgbModule,
+        BrowserModule,
+        FormsModule,
         ReactiveFormsModule,
         HttpModule,
         NgbModule,
@@ -37,9 +41,10 @@ describe('ProgramsComponent', () => {
     fixture = TestBed.createComponent(ProgramsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  });  
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });
