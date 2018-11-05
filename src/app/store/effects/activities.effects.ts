@@ -9,6 +9,8 @@ import { Observable, of as observableOf } from 'rxjs';
 import Activity from '../../models/activities.model';
 import { AppService } from '../../app.service';
 
+const toPayload = <T>(action: { payload: T }) => action.payload;
+
 
 @Injectable()
 export class ActivitiesEffects {
@@ -32,8 +34,24 @@ export class ActivitiesEffects {
             */
             localStorage.setItem('activities', JSON.stringify(result));
             return ({ type: activityActions.ActivityActionTypes.ACTIVITIES_LOADED, payload: result })
-          })
+          }),
+          catchError(() => observableOf(new activityActions.LoadActivitiesError()))
         )
+    })
+  );
+
+
+  @Effect()
+  loadCachedActivitiesEffect$ = this.actions$.pipe(
+     ofType<activityActions.LoadActivitiesError>(activityActions.ActivityActionTypes.LOAD_ACTIVITIES_ERROR),
+     map(action => {
+      const activities = JSON.parse(localStorage.getItem('activities'))
+      if (activities !== null) {
+        console.warn('Cached Data: Activities')
+        return ({ type: activityActions.ActivityActionTypes.ACTIVITIES_LOADED, payload: activities })
+      } else {
+        console.log('No activities in localstorage')
+      }
     })
   );
 
