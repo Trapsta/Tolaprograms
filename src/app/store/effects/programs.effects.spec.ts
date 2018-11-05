@@ -3,6 +3,8 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 
 import { ProgramsEffects } from './programs.effects';
+import { AppModule } from '../../app.module';
+import { APP_BASE_HREF } from '@angular/common';
 
 describe('ProgramsEffects', () => {
   let actions$: Observable<any>;
@@ -10,9 +12,11 @@ describe('ProgramsEffects', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [AppModule],
       providers: [
         ProgramsEffects,
-        provideMockActions(() => actions$)
+        provideMockActions(() => actions$),
+        {provide: APP_BASE_HREF, useValue: '/'}
       ]
     });
 

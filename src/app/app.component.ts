@@ -29,8 +29,8 @@ export class AppComponent {
     store.subscribe(state => {
       this.programs$ = state.programs.programs
       this.activities$ = state.activities.activities
-      //console.log(state)
 
+      //Check state for notifications
       if ( state.activities.flashMessage !== undefined && state.activities.flashMessage !== "" ) {
         this.messages.push({id : this.messages.length + 1  , message : state.activities.flashMessage , type : "info"})
       }
@@ -57,6 +57,7 @@ export class AppComponent {
   ngOnInit() {
   	this.store.dispatch(new programActions.LoadProgramsAction());
     this.store.dispatch(new activityActions.LoadActivitiesAction());
+    console.log(typeof(this.programs$));
   }
 
 
