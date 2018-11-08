@@ -1,6 +1,13 @@
 import { Action } from '@ngrx/store';
 import Activity from '../../models/activities.model';
 
+declare module '@ngrx/store' {
+  interface Action {
+    type: string;
+    payload?: any;
+  }
+}
+
 export enum ActivityActionTypes {
   LOAD_ACTIVITIES = '[Activity] Load Activities',
   ACTIVITIES_LOADED = '[Activity] Activities Loaded',
